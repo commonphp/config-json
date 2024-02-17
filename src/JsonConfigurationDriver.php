@@ -4,8 +4,7 @@ namespace CommonPHP\Configuration\Drivers\JsonConfigurationDriver;
 
 use CommonPHP\Configuration\Attributes\ConfigurationDriverAttribute;
 use CommonPHP\Configuration\Contracts\ConfigurationDriverContract;
-use Exception;
-use JsonException;
+use CommonPHP\Configuration\Exceptions\ConfigurationException;
 use Override;
 
 #[ConfigurationDriverAttribute('json')]
@@ -17,36 +16,35 @@ class JsonConfigurationDriver implements ConfigurationDriverContract
     }
 
     /**
-     * @throws JsonException
-     * @throws Exception
+     * @throws ConfigurationException
      */
     #[Override] function load(string $filename): array
     {
         $json = file_get_contents($filename);
         if (!json_validate($json))
         {
-            throw new JsonException('Invalid JSON in '.$filename);
+            throw new ConfigurationException('Invalid JSON in '.$filename);
         }
         $result = json_decode($json, true);
         if ($result === false)
         {
-            throw new Exception('json_decode(...) returned false on '.$filename);
+            throw new ConfigurationException('json_decode(...) returned false on '.$filename);
         }
         if ($result === null)
         {
-            throw new Exception('json_decode(...) returned *NULL* on '.$filename);
+            throw new ConfigurationException('json_decode(...) returned *NULL* on '.$filename);
         }
         return $result;
     }
 
     /**
-     * @throws Exception
+     * @throws ConfigurationException
      */
     #[Override] function save(string $filename, array $data): void
     {
         if (file_put_contents($filename, json_encode($data)) === false)
         {
-            throw new Exception('file_put_contents(...) returned false on '.$filename);
+            throw new ConfigurationException('file_put_contents(...) returned false on '.$filename);
         }
     }
 }
