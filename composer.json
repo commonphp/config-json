@@ -1,0 +1,29 @@
+{
+  "name": "comphp/config-json",
+  "type": "library",
+  "description": "Provides functionality necessary for working with JSON configuration files",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "timothy.mcclatchey",
+      "email": "timothy@commonphp.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CommonPHP\\Configuration\\Drivers\\JsonConfigurationDriver\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CommonPHP\\Tests\\Drivers\\JsonConfigurationDriver\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^8.3",
+    "comphp/config": "^0.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5.9"
+  }
+}
