@@ -1,12 +1,6 @@
 <?php /** @noinspection PhpUnused */
 
-/**
- * JsonConfigurationDriver class is responsible for loading and saving JSON configuration files.
- *
- * The class implements the ConfigurationDriverContract interface.
- *
- * @package CommonPHP\Configuration\Drivers\JsonConfigurationDriver
- */
+declare(strict_types=1);
 
 namespace CommonPHP\Configuration\Drivers\JsonConfigurationDriver;
 
