@@ -1,5 +1,13 @@
 <?php /** @noinspection PhpUnused */
 
+/**
+ * JsonConfigurationDriver class is responsible for loading and saving JSON configuration files.
+ *
+ * The class implements the ConfigurationDriverContract interface.
+ *
+ * @package CommonPHP\Configuration\Drivers\JsonConfigurationDriver
+ */
+
 namespace CommonPHP\Configuration\Drivers\JsonConfigurationDriver;
 
 use CommonPHP\Configuration\Attributes\ConfigurationDriverAttribute;
@@ -7,16 +15,42 @@ use CommonPHP\Configuration\Contracts\ConfigurationDriverContract;
 use CommonPHP\Configuration\Exceptions\ConfigurationException;
 use Override;
 
+/**
+ * JsonConfigurationDriver class is responsible for loading and saving JSON configuration files.
+ *
+ * The class implements the ConfigurationDriverContract interface.
+ *
+ * JsonConfigurationDriver has the following attributes:
+ * - #[ConfigurationDriverAttribute('json')]: Specifies that this driver handles JSON configuration files.
+ *
+ * The class has the following public methods:
+ * - canSave(): bool - Overrides the method from the parent interface and returns true.
+ * - load(string $filename): array - Loads the JSON configuration file and returns the decoded content as an array.
+ * - save(string $filename, array $data): void - Saves the given data to a file in JSON format.
+ *
+ * The class also throws a ConfigurationException if there are any errors during the loading or saving process.
+ */
 #[ConfigurationDriverAttribute('json')]
 class JsonConfigurationDriver implements ConfigurationDriverContract
 {
+    /**
+     * Determines whether the configuration can be saved.
+     *
+     * @return bool Whether the configuration can be saved.
+     */
     #[Override] function canSave(): bool
     {
         return true;
     }
 
     /**
-     * @throws ConfigurationException
+     * Loads the JSON configuration file and returns the decoded content as an array.
+     *
+     * @param string $filename The path to the JSON configuration file to load.
+     *
+     * @return array The decoded content of the JSON configuration file.
+     *
+     * @throws ConfigurationException If the JSON file is invalid or cannot be decoded.
      */
     #[Override] function load(string $filename): array
     {
@@ -38,7 +72,12 @@ class JsonConfigurationDriver implements ConfigurationDriverContract
     }
 
     /**
-     * @throws ConfigurationException
+     * Saves the given data to a file in JSON format.
+     *
+     * @param string $filename The path of the file to save the data to.
+     * @param array $data The data to be saved in JSON format.
+     *
+     * @throws ConfigurationException If an error occurs while saving the data.
      */
     #[Override] function save(string $filename, array $data): void
     {
