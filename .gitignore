@@ -1,4 +1,6 @@
+.dev/
 .idea/
-composer.lock
+legacy/
 vendor/
+composer.lock
 .phpunit.result.cache
