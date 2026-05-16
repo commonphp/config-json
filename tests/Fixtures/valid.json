@@ -1,0 +1,8 @@
+{
+  "name": "demo",
+  "enabled": true,
+  "retries": 3,
+  "database": {
+    "host": "localhost"
+  }
+}
