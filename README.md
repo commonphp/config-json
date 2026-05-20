@@ -41,7 +41,7 @@ $fromFile = $driver->read(__DIR__ . '/config.json');
 
 ## Format Notes
 
-JSON data must decode to a PHP array. JSON objects and arrays can be configuration containers; scalar JSON values such as `true` or `"hello"` are rejected by `decode()`. `validate()` checks JSON syntax.
+JSON data must decode to a PHP array. JSON objects and arrays can be configuration containers; scalar JSON values such as `true` or `"hello"` are rejected by `decode()` and `validate()`.
 
 ## Error Handling
 

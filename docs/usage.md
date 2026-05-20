@@ -29,6 +29,6 @@ $config = $driver->read(__DIR__ . '/config.json');
 
 ## Notes
 
-Decoded JSON must produce a PHP array. Scalar-only JSON is not accepted as a configuration array.
+Decoded JSON must produce a PHP array. Scalar-only JSON is not accepted as a configuration array, including during validation.
 
 Failures throw CommonPHP config exceptions instead of returning `false`.

@@ -2,22 +2,46 @@
 
 declare(strict_types=1);
 
-$autoload = dirname(__DIR__) . '/vendor/autoload.php';
+$packageRoot = dirname(__DIR__);
+$workspaceRoot = dirname($packageRoot, 3);
+$autoloads = [
+    $packageRoot . '/vendor/autoload.php',
+    $workspaceRoot . '/vendor/autoload.php',
+];
+$envAutoload = getenv('COMMONPHP_TEST_AUTOLOAD') ?: '';
 
-if (is_file($autoload)) {
-    require $autoload;
-
-    return;
+if ($envAutoload !== '') {
+    $autoloads[] = $envAutoload;
 }
 
-$autoload = getenv('COMMONPHP_TEST_AUTOLOAD') ?: '';
+$autoload = null;
 
-if ($autoload !== '' && is_file($autoload)) {
-    require $autoload;
-
-    return;
+foreach ($autoloads as $candidate) {
+    if (is_file($candidate)) {
+        $autoload = $candidate;
+        break;
+    }
 }
 
-throw new RuntimeException(
-    'Composer autoload file not found. Run "composer install" before running the test suite.'
-);
+if ($autoload === null) {
+    throw new RuntimeException(
+        'Composer dependencies are not installed. Run `composer install` before running the test suite.',
+    );
+}
+
+require $autoload;
+
+spl_autoload_register(static function (string $class) use ($packageRoot): void {
+    $prefix = 'CommonPHP\\Drivers\\Config\\JSON\\Tests\\';
+
+    if (!str_starts_with($class, $prefix)) {
+        return;
+    }
+
+    $relativePath = str_replace('\\', '/', substr($class, strlen($prefix)));
+    $file = $packageRoot . '/tests/' . $relativePath . '.php';
+
+    if (is_file($file)) {
+        require $file;
+    }
+});

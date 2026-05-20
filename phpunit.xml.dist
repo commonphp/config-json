@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/13.0/phpunit.xsd"
-         bootstrap="tests/bootstrap.php"
-         colors="true"
-         cacheDirectory=".phpunit.cache">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    bootstrap="tests/bootstrap.php"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    beStrictAboutOutputDuringTests="true"
+    failOnDeprecation="true"
+    failOnNotice="true"
+    failOnRisky="true"
+    failOnWarning="true"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/13.0/phpunit.xsd"
+>
     <testsuites>
-        <testsuite name="Unit">
-            <directory>tests/Unit</directory>
+        <testsuite name="CommonPHP JSON Config Driver Unit Test Suite">
+            <directory suffix="Test.php">tests/Unit</directory>
         </testsuite>
     </testsuites>
+
     <source>
         <include>
-            <directory>src</directory>
+            <directory suffix=".php">src</directory>
         </include>
     </source>
 </phpunit>

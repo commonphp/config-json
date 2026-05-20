@@ -8,12 +8,19 @@ use CommonPHP\Config\Contracts\AbstractConfigDriver;
 use CommonPHP\Config\Exceptions\ConfigException;
 use CommonPHP\Config\Exceptions\ConfigValidationException;
 use JsonException;
+use Throwable;
 
 final class JsonConfigurationDriver extends AbstractConfigDriver
 {
     public function validate(string $data): bool
     {
-        return json_validate($data);
+        try {
+            $this->decode($data);
+
+            return true;
+        } catch (Throwable) {
+            return false;
+        }
     }
 
     public function encode(array $config): string

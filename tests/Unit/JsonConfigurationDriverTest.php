@@ -40,6 +40,8 @@ final class JsonConfigurationDriverTest extends TestCase
 
         self::assertTrue($driver->validate((string) file_get_contents($this->fixturePath('valid.json'))));
         self::assertFalse($driver->validate('{"name":'));
+        self::assertFalse($driver->validate('true'));
+        self::assertFalse($driver->validate('"hello"'));
     }
 
     public function testEncodeCreatesJsonThatCanBeDecoded(): void
